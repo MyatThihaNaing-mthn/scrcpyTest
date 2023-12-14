@@ -275,7 +275,7 @@ public class Controller implements AsyncProcessor {
                 if (actionButton == buttons) {
                     // First button pressed: ACTION_DOWN
                     MotionEvent downEvent = MotionEvent.obtain(lastTouchDown, now, MotionEvent.ACTION_DOWN, pointerCount, pointerProperties,
-                            pointerCoords, 0, buttons, 1f, 1f, DEFAULT_DEVICE_ID, 0, source, 0);
+                            pointerCoords, 0, buttons, 0.999f, 0.999f, DEFAULT_DEVICE_ID, 0, source, 0);
                     if (!device.injectEvent(downEvent, Device.INJECT_MODE_ASYNC)) {
                         return false;
                     }
@@ -283,7 +283,7 @@ public class Controller implements AsyncProcessor {
 
                 // Any button pressed: ACTION_BUTTON_PRESS
                 MotionEvent pressEvent = MotionEvent.obtain(lastTouchDown, now, MotionEvent.ACTION_BUTTON_PRESS, pointerCount, pointerProperties,
-                        pointerCoords, 0, buttons, 1f, 1f, DEFAULT_DEVICE_ID, 0, source, 0);
+                        pointerCoords, 0, buttons, 0.888f, 0.888f, DEFAULT_DEVICE_ID, 0, source, 0);
                 if (!InputManager.setActionButton(pressEvent, actionButton)) {
                     return false;
                 }
@@ -297,7 +297,7 @@ public class Controller implements AsyncProcessor {
             if (action == MotionEvent.ACTION_UP) {
                 // Any button released: ACTION_BUTTON_RELEASE
                 MotionEvent releaseEvent = MotionEvent.obtain(lastTouchDown, now, MotionEvent.ACTION_BUTTON_RELEASE, pointerCount, pointerProperties,
-                        pointerCoords, 0, buttons, 1f, 1f, DEFAULT_DEVICE_ID, 0, source, 0);
+                        pointerCoords, 0, buttons, 0.777f, 0.777f, DEFAULT_DEVICE_ID, 0, source, 0);
                 if (!InputManager.setActionButton(releaseEvent, actionButton)) {
                     return false;
                 }
@@ -308,7 +308,7 @@ public class Controller implements AsyncProcessor {
                 if (buttons == 0) {
                     // Last button released: ACTION_UP
                     MotionEvent upEvent = MotionEvent.obtain(lastTouchDown, now, MotionEvent.ACTION_UP, pointerCount, pointerProperties,
-                            pointerCoords, 0, buttons, 1f, 1f, DEFAULT_DEVICE_ID, 0, source, 0);
+                            pointerCoords, 0, buttons, 0.666f, 0.666f, DEFAULT_DEVICE_ID, 0, source, 0);
                     if (!device.injectEvent(upEvent, Device.INJECT_MODE_ASYNC)) {
                         return false;
                     }
@@ -318,7 +318,7 @@ public class Controller implements AsyncProcessor {
             }
         }
 
-        MotionEvent event = MotionEvent.obtain(lastTouchDown, now, action, pointerCount, pointerProperties, pointerCoords, 0, buttons, 1f, 1f,
+        MotionEvent event = MotionEvent.obtain(lastTouchDown, now, action, pointerCount, pointerProperties, pointerCoords, 0, buttons, 0.555f, 0.555f,
                 DEFAULT_DEVICE_ID, 0, source, 0);
         return device.injectEvent(event, Device.INJECT_MODE_ASYNC);
     }
@@ -340,7 +340,7 @@ public class Controller implements AsyncProcessor {
         coords.setAxisValue(MotionEvent.AXIS_HSCROLL, hScroll);
         coords.setAxisValue(MotionEvent.AXIS_VSCROLL, vScroll);
 
-        MotionEvent event = MotionEvent.obtain(lastTouchDown, now, MotionEvent.ACTION_SCROLL, 1, pointerProperties, pointerCoords, 0, buttons, 1f, 1f,
+        MotionEvent event = MotionEvent.obtain(lastTouchDown, now, MotionEvent.ACTION_SCROLL, 1, pointerProperties, pointerCoords, 0, buttons, 0.444f, 0.444f,
                 DEFAULT_DEVICE_ID, 0, InputDevice.SOURCE_MOUSE, 0);
         return device.injectEvent(event, Device.INJECT_MODE_ASYNC);
     }
